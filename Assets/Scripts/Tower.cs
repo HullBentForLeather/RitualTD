@@ -12,7 +12,7 @@ public class Tower : MonoBehaviour
     public int Damage = 1;
 
     float lastShot = 0;
-    float fireRate = 0.5f;
+    float fireRate = 2f;
 
     public Transform shotOrigin;
 

@@ -5,7 +5,7 @@ public class PlayerRotation : MonoBehaviour
 {
 
     public GameObject bullet;
-    float shootDelay = 0.1f;
+    float shootDelay = 1f;
     bool canShoot;
 
 
@@ -32,8 +32,8 @@ public class PlayerRotation : MonoBehaviour
 
 
         Transform mainCamera = Camera.main.transform;
-        direction = new Vector3(rightThumbStick.x, 0, rightThumbStick.y);
-
+        //direction = new Vector3(rightThumbStick.x, 0, rightThumbStick.y);
+        direction = Vector3.right * rightThumbStick.x + Vector3.forward * rightThumbStick.y;
         if (rightThumbStick.sqrMagnitude < 0.1f)
         {
 
