@@ -15,13 +15,15 @@ public class OrbOfProgressBehav : MonoBehaviour {
     float currentEnemies;
     int currentStage = -1;
 
+    GameObject line = new GameObject();
+
     bool waveInProgress = false;
 
     // Use this for initialization
     void Start () {
 
-        leftMostPos = new Vector3(-494, -55, 0);
-        rightMostPos = new Vector3(473, -55, 0);
+        leftMostPos = new Vector3(-494, -140, 0);
+        rightMostPos = new Vector3(473, -140, 0);
 
         orb = GetComponent<Image>();
         orb.transform.localPosition = leftMostPos;
@@ -34,6 +36,14 @@ public class OrbOfProgressBehav : MonoBehaviour {
             waveEndValues.Add(1f / 9f * i);
         }
 
+        //LINE STUFF
+    //    line.transform.localPosition = leftMostPos;
+        line.AddComponent<LineRenderer>();
+        LineRenderer lr = line.GetComponent<LineRenderer>();
+        lr.SetColors(Color.red, Color.red);
+        lr.SetWidth(0.1f, 0.1f);
+        lr.SetPosition(0, leftMostPos);
+        lr.SetPosition(1, orb.transform.localPosition);
 
     }
 
@@ -47,6 +57,7 @@ public class OrbOfProgressBehav : MonoBehaviour {
                 float newx = Mathf.Lerp(waveEndValues[currentStage], waveEndValues[currentStage + 1], x);
                 newx = Mathf.Lerp(leftMostPos.x, rightMostPos.x, newx);
                 orb.transform.localPosition = new Vector3(newx, orb.transform.localPosition.y, orb.transform.localPosition.z);
+
             }
         }
         else
