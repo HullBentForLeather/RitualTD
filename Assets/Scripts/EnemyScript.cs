@@ -15,7 +15,7 @@ public class EnemyScript : MonoBehaviour, IDamageable
 
     public PathNode currentNode;
 
-    float speed = 1f;
+    public float speed = 1f;
 
     [SerializeField]
     int targetIndex = 0;
