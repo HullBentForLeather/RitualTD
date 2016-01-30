@@ -36,9 +36,9 @@ public class OrbOfProgressBehav : MonoBehaviour {
 
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    void UpdateUI()
+    {
         if (currentStage >= 0)
         {
             if (currentStage < 9)
@@ -53,7 +53,11 @@ public class OrbOfProgressBehav : MonoBehaviour {
         {
             orb.transform.localPosition = leftMostPos;
         }
-
+    }
+	
+	// Update is called once per frame
+	void Update ()
+    {
         if (Input.GetKeyDown("j"))
         {
             newWave(10);
@@ -78,11 +82,13 @@ public class OrbOfProgressBehav : MonoBehaviour {
         currentStage++;
         currentEnemies = enemies;
         totalEnemies = enemies;
+        UpdateUI();
     }
 
     void killEnemy()
     {
         currentEnemies--;
+        UpdateUI();
     }
 
 }
