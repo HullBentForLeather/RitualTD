@@ -47,6 +47,22 @@ public class WaveController : MonoBehaviour
             {
                 Wave5();
             }
+            if (Input.GetKeyDown(KeyCode.Keypad6))
+            {
+                Wave6();
+            }
+            if (Input.GetKeyDown(KeyCode.Keypad6))
+            {
+                Wave7();
+            }
+            //if (Input.GetKeyDown(KeyCode.Keypad5))
+            //{
+            //  //  Wave8();
+            //}
+            //if (Input.GetKeyDown(KeyCode.Keypad5))
+            //{
+            // //   Wave9();
+            //}
         }
 	}
 
@@ -55,52 +71,61 @@ public class WaveController : MonoBehaviour
         progress.killEnemy();
     }
 
-    void Wave1()
+    void Wave1() 
     {
-        int enemies = 10;
+        int enemies = 5;
         spawn1.StartWave(enemies, 5, 1, Color.red);
         progress.newWave(enemies);
     }
 
     void Wave2()
     {
-        int enemies = 30;
-        spawn1.StartWave(10, 5, 1, Color.red);
+        int enemies = 10;
+        spawn1.StartWave(5, 5, 1, Color.blue);
 
-        spawn2.StartWave(20, 10, 1.5f, Color.blue);
+        spawn2.StartWave(5, 10, 1.5f, Color.blue);
 
         progress.newWave(enemies);
     }
 
     void Wave3()
     {
-        int enemies = 40;
-        spawn1.StartWave(10, 0, 3, Color.red);
+        int enemies = 20;
+        spawn1.StartWave(10, 0, 2, Color.red);
         spawn2.StartWave(10, 0, 3, Color.blue);
-        spawn3.StartWave(10, 0, 3, Color.green);
-        spawn4.StartWave(10, 0, 3, Color.yellow);
+
 
         progress.newWave(enemies);
     }
 
     void Wave4()
     {
-        int enemies = 40;
+        int enemies = 30;
         spawn1.StartWave(10, 0, 2, Color.red);
-        spawn2.StartWave(10, 0, 2, Color.blue);
-        spawn3.StartWave(10, 0, 2, Color.green);
-        spawn4.StartWave(10, 0, 2, Color.yellow);
+        spawn2.StartWave(10, 0, 1, Color.red);
+        spawn3.StartWave(10, 0, 3, Color.red);
+      
         progress.newWave(enemies);
     }
 
     void Wave5()
     {
-        int enemies = 80;
-        spawn1.StartWave(10, 0, 2, Color.red);
-        spawn2.StartWave(10, 0, 2, Color.blue);
-        spawn3.StartWave(20, 0, 2, Color.green);
-        spawn4.StartWave(20, 0, 2, Color.yellow);
-        spawn5.StartWave(20, 0, 2, Color.black);
+        int enemies = 10;
+        spawn3.StartWave(10, 0, 2, Color.green);
+        progress.newWave(enemies);
+    }
+
+    void Wave6()
+    {
+        int enemies = 20;
+        spawn1.StartWave(10, 0, 2, Color.green);
+        progress.newWave(enemies);
+    }
+    void Wave7()
+    {
+        int enemies = 30;
+        spawn1.StartWave(10, 0, 2, Color.green);
+        spawn2.StartWave(10, 0, 2, Color.red);
         progress.newWave(enemies);
     }
 }
