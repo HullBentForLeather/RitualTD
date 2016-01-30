@@ -40,6 +40,8 @@ public class EnemySpawner : MonoBehaviour {
         waveStarted = true;
 
         this.color = color;
+
+
     }
 
 
@@ -78,5 +80,8 @@ public class EnemySpawner : MonoBehaviour {
                 }
             }
         }
+
+
+
 	}
 }

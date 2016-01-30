@@ -21,6 +21,7 @@ public class WaveController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+
         if (!progress.IsWaveInProgress())
         {
             if (Input.GetKeyDown(KeyCode.Keypad1))
