@@ -113,13 +113,13 @@ public class EnemyScript : MonoBehaviour, IDamageable
         }
     }
 
-    void OnCollisionEnter(Collision coll)
+    void OnTriggerEnter(Collider other)
     {
 
 
-        if (coll.gameObject.tag == "HitBox")
+        if (other.gameObject.tag == "HitBox")
         {
-            HP--;
+            DoDamage(1);
         }
 
         
