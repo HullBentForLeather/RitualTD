@@ -6,6 +6,9 @@ public class EnemyScript : MonoBehaviour, IDamageable
 {
     public static List<EnemyScript> ActiveEnemies = new List<EnemyScript>();
 
+    public delegate void EnemyDied();
+    public static event EnemyDied OnEnemyDied;
+
     [SerializeField]
     int HP;
     public int startingHP;
@@ -49,6 +52,11 @@ public class EnemyScript : MonoBehaviour, IDamageable
         {
             ActiveEnemies.Remove(this);
             gameObject.SetActive(false);
+
+            if (OnEnemyDied != null)
+            {
+                OnEnemyDied();
+            }
         }
     }
 
