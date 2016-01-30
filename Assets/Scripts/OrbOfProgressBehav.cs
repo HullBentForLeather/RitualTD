@@ -14,8 +14,8 @@ public class OrbOfProgressBehav : MonoBehaviour {
     float totalEnemies;
     float currentEnemies;
     int currentStage = -1;
-    
 
+    bool waveInProgress = false;
 
     // Use this for initialization
     void Start () {
@@ -77,18 +77,28 @@ public class OrbOfProgressBehav : MonoBehaviour {
 
     }
 
-    void newWave(int enemies)
+    public void newWave(int enemies)
     {
+        waveInProgress = true;
         currentStage++;
         currentEnemies = enemies;
         totalEnemies = enemies;
         UpdateUI();
     }
 
-    void killEnemy()
+    public void killEnemy()
     {
         currentEnemies--;
         UpdateUI();
+        if (currentEnemies == 0)
+        {
+            waveInProgress = false;
+        }
+    }
+
+    public bool IsWaveInProgress()
+    {
+        return waveInProgress;
     }
 
 }

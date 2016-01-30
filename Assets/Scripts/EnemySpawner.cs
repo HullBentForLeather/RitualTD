@@ -7,79 +7,76 @@ public class EnemySpawner : MonoBehaviour {
 
     public GameObject enemyPrefab;
     List<GameObject> enemies = new List<GameObject>();
-    bool waveStarted;
-    bool canSpawnEnemy;
-    public float spawnCountDown;
-    public float waveStartCountDown;
 
-    [SerializeField]
-    float spawnTimer;
-    [SerializeField]
-    float waveTimer;
+    bool waveStarted = false;
+
+    int spawnCount;
+    int numSpawned;
+    float startDelay = 0;
+    float spawnDelay = 1f;
+    float lastSpawn = 0;
+    float waveStartTime = 0;
+
+    Color color = Color.white;
 
     public PathNode startNode;
 
     // Use this for initialization
     void Start ()
     {
-        canSpawnEnemy = false;
         waveStarted = false;
-        spawnTimer = spawnCountDown;
-        waveTimer = waveStartCountDown;
 	}
 	
-    
+    public void StartWave(int count, float delay, float spawnrate, Color color)
+    {
+        spawnCount = count;
+        numSpawned = 0;
+
+        startDelay = delay;
+        spawnDelay = spawnrate;
+        lastSpawn = 0;
+        waveStartTime = Time.time;
+
+        waveStarted = true;
+
+        this.color = color;
+    }
 
 
 	// Update is called once per frame
 	void Update ()
     {
-	    if (waveStarted)
+        if (waveStarted)
         {
-            if (canSpawnEnemy)
+            if (numSpawned >= spawnCount)
             {
-
-                spawnTimer = spawnCountDown;
-                canSpawnEnemy = false;
-
-
-                // spawn enemy here
-                GameObject newItem = Instantiate(enemyPrefab);
-                newItem.transform.position = transform.position;
-
-
-                EnemyScript enemyScript = newItem.GetComponent<EnemyScript>();
-
-
-                enemyScript.SetStartNode(startNode);
-
-                enemies.Add(newItem);
-                
+                waveStarted = false;
             }
             else
             {
-                spawnTimer -= Time.deltaTime;
+                if (Time.time > waveStartTime + startDelay)
+                {
+                    if (Time.time > lastSpawn + spawnDelay)
+                    {
+                        // spawn enemy here
+                        GameObject newItem = Instantiate(enemyPrefab);
+                        newItem.transform.position = transform.position;
 
 
+                        EnemyScript enemyScript = newItem.GetComponent<EnemyScript>();
+
+
+                        enemyScript.SetStartNode(startNode);
+
+                        enemyScript.GetComponentInChildren<Renderer>().material.color = color;
+
+                        enemies.Add(newItem);
+
+                        lastSpawn = Time.time;
+                        ++numSpawned;
+                    }
+                }
             }
-
-
-
-            if (spawnTimer < 0)
-            {
-                canSpawnEnemy = true;
-            }
         }
-        else
-        {
-            waveTimer -= Time.deltaTime;
-        }
-
-        if (waveTimer < 0)
-        {
-            waveStarted = true;
-        }
-
-        
 	}
 }
