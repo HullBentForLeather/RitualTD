@@ -29,7 +29,7 @@ public class TowerBase : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-	    if (!built && playerInBounds && Input.GetButtonDown("Fire1"))
+	    if (!built && playerInBounds && Input.GetButtonDown("Build Tower"))
         {
             GameObject.Instantiate(tower, transform.position, transform.rotation);
             built = true;
