@@ -40,7 +40,7 @@ public class PlayerRotation : MonoBehaviour
         }
         else
         {
-            transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+            transform.rotation = Quaternion.LookRotation(direction);
 
             if (canShoot)
             {
