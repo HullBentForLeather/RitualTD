@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour {
     [SerializeField]
     float waveTimer;
 
-    public List<GameObject> nodeList = new List<GameObject>();
+    public PathNode startNode;
 
     // Use this for initialization
     void Start ()
@@ -45,13 +45,13 @@ public class EnemySpawner : MonoBehaviour {
 
                 // spawn enemy here
                 GameObject newItem = Instantiate(enemyPrefab);
-                newItem.transform.parent = transform;
+                newItem.transform.position = transform.position;
 
 
                 EnemyScript enemyScript = newItem.GetComponent<EnemyScript>();
 
 
-                enemyScript.NewList(nodeList);
+                enemyScript.SetStartNode(startNode);
 
                 enemies.Add(newItem);
                 

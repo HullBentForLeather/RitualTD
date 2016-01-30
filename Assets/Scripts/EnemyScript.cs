@@ -2,16 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class EnemyScript : MonoBehaviour
+public class EnemyScript : MonoBehaviour, IDamageable
 {
+    public static List<EnemyScript> ActiveEnemies = new List<EnemyScript>();
 
     [SerializeField]
     int HP;
     public int startingHP;
 
-    public List<GameObject> nodeList;
+    public PathNode currentNode;
 
-    float speed = 0.01f;
+    float speed = 1f;
 
     [SerializeField]
     int targetIndex = 0;
@@ -21,56 +22,95 @@ public class EnemyScript : MonoBehaviour
     Vector3 currentPosition;
     Vector3 directionOfTravel;
 
-    public void NewList(List<GameObject> inNodeList)
+    IDamageable target = null;
+
+    public float AttackDelay = 1f;
+    public int AttackDamage = 1;
+
+    public void SetStartNode(PathNode node)
     {
-        nodeList = inNodeList;
+        currentNode = node;
     }
 
 
 
     // Use this for initialization
     void Start ()
-    {
+    {      
         HP = startingHP;
         targetIndex = 0;
+        ActiveEnemies.Add(this);
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    public void DoDamage(int amount)
     {
+        HP -= amount;
         if (HP <= 0)
         {
-            Destroy(gameObject);
+            ActiveEnemies.Remove(this);
+            gameObject.SetActive(false);
         }
-	}
+    }
+
+    public bool IsAlive()
+    {
+        if (HP <= 0)
+            {
+            return false;        
+            }
+
+        return true;
+    }
+
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
+
+    float attackCounter = 0;
 
     void FixedUpdate()
     {
-        
-        directionOfTravel = nodeList[targetIndex].transform.position - transform.position;
-
-
-        //Debug.ClearDeveloperConsole();
-        //Debug.Log("The position for the target is X:" + nodeList[0].transform.position.x + " Y:" + nodeList[0].transform.position.y + " Z:" + nodeList[0].transform.position.z);
-        //Debug.Log("The position of the enemy is X:" + transform.position.x + " Y:" + transform.transform.position.y + " Z:" + transform.position.z);
-
-        
-
-
-        transform.Translate((directionOfTravel.x * speed), (0), (directionOfTravel.z * speed), Space.World);
-        
-        //Debug.Log(Vector3.Distance(transform.position, nodeList[targetIndex].transform.position));
-        if (Vector3.Distance(transform.position, nodeList[targetIndex].transform.position) < 4f)
+        if (target != null && !target.IsAlive())
         {
-            //Debug.Log(Vector3.Distance(transform.position, nodeList[targetIndex].transform.position));
-            if (targetIndex < nodeList.Count - 1)
-            {
-                targetIndex++;
-            }
-
+            target = null;
         }
-        
 
+        if (target != null)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.GetPosition(), speed * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, target.GetPosition()) < 0.5f)
+            {
+                attackCounter += Time.deltaTime;
+
+                if (attackCounter > AttackDelay)
+                {
+                    attackCounter = 0;
+                    target.DoDamage(AttackDamage);                    
+                }
+            }
+            else
+            {
+                attackCounter = 0;
+            }
+        }
+        else
+        {
+            if (currentNode != null)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, currentNode.transform.position, speed * Time.deltaTime);
+
+                if (Vector3.Distance(transform.position, currentNode.transform.position) < 0.1f)
+                {
+                    currentNode = currentNode.nextNode;
+                }
+            }
+            else
+            {
+                target = Core.ActiveCore.GetPillar();
+            }
+        }
     }
 
     void OnCollisionEnter(Collision coll)
