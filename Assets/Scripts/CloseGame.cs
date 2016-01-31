@@ -1,17 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CloseGame : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+public class CloseGame : MonoBehaviour
+{ 
 
     public void closeApplication()
     {

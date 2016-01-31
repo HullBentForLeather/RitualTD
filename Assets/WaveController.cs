@@ -277,11 +277,11 @@ public class WaveController : MonoBehaviour
     void Wave10()
     {
         int enemies = 5;
-        spawn1.StartWave(1, 0, 1f, Color.red, 30);
-        spawn2.StartWave(1, 3, 1f, Color.red, 30);
-        spawn3.StartWave(1, 6, 1f, Color.red, 30);
-        spawn4.StartWave(1, 9, 1f, Color.red, 30);
-        spawn5.StartWave(1, 12, 1f, Color.red, 30);
+        spawn1.StartWave(1, 0, 1f, Color.red, 10);
+        spawn2.StartWave(1, 3, 1f, Color.red, 10);
+        spawn3.StartWave(1, 6, 1f, Color.red, 10);
+        spawn4.StartWave(1, 9, 1f, Color.red, 10);
+        spawn5.StartWave(1, 12, 1f, Color.red, 10);
 
 
         

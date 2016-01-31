@@ -14,14 +14,20 @@ Platform assembly: C:\Users\Sam\Documents\RitualTD\Waves From The Graves_Data\Ma
 Loading C:\Users\Sam\Documents\RitualTD\Waves From The Graves_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\Sam\Documents\RitualTD\Waves From The Graves_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\Sam\Documents\RitualTD\Waves From The Graves_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.101 seconds
+- Completed reload, in  0.096 seconds
 Platform assembly: C:\Users\Sam\Documents\RitualTD\Waves From The Graves_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\Sam\Documents\RitualTD\Waves From The Graves_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 59Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 0.680603 ms
+UnloadTime: 0.438673 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 2988 -> priority: 1 
-  Thread -> id: 258c -> priority: 1 
+  Thread -> id: 136c -> priority: 1 
+  Thread -> id: 211c -> priority: 1 
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 4.444698 ms
+
+Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 11638.
+Total: 0.926793 ms (FindLiveObjects: 0.247866 ms CreateObjectMapping: 0.136330 ms MarkObjects: 0.520387 ms  DeleteObjects: 0.018368 ms)
+

@@ -57,6 +57,7 @@ public class PlayerControls : MonoBehaviour
 
     void DoAttacks()
     {
+
         if (Input.GetButtonDown("Forward Attack"))
         {
             swordAttack.StartAttacking();
@@ -88,6 +89,10 @@ public class PlayerControls : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetButton("Escape"))
+        {
+            Application.Quit();
+        }
         DoMovement();
 
         DoTurning();
