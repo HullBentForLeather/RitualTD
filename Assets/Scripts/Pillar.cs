@@ -23,7 +23,7 @@ public class Pillar : MonoBehaviour, IDamageable
         {           
             Alive = false;
             myCore.DoDamage(this);
-
+            GameManager.PillarFallDown();
             StartCoroutine(FallDown());
         }
         
