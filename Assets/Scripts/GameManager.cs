@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour {
     public static void PillarFallDown()
     {
         Debug.Log("YOU DYING SUCKAH!. YOU GOT " + shrineHP + " LEFT" );
-        shrineHP--;
+        //shrineHP--;
     }
 
 

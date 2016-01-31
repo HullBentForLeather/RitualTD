@@ -5,7 +5,7 @@ public class PlayerRotation : MonoBehaviour
 {
 
     public GameObject bullet;
-    float shootDelay = 1f;
+    float shootDelay = 0.5f;
     bool canShoot;
     AudioSource pew;
     public Vector2 rightThumbStick;
