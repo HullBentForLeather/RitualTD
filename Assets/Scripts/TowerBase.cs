@@ -7,6 +7,8 @@ public class TowerBase : MonoBehaviour
 
     bool playerInBounds = false;
 
+    bool towerActive = false;
+
     AudioSource clang;
 
     public GameObject tower;
@@ -32,14 +34,49 @@ public class TowerBase : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-	    if (playerInBounds && Input.GetButtonDown("Build Tower"))
+	    if (!towerActive && playerInBounds && Input.GetButtonDown("Build Tower"))
         {
             clang = GetComponent<AudioSource>();
             clang.Play();
-            gameObject.SetActive(true);
-            GameObject.Instantiate(tower, transform.position, transform.rotation);
-            
-              
+
+
+            towerActive = true;
+            StartCoroutine(StartTower());
         }
 	}
+
+    IEnumerator StartTower()
+    {
+        tower.SetActive(true);
+
+        Vector3 startPos = tower.transform.localPosition;
+        Vector3 targetPos = startPos + new Vector3(0, 2, 0);
+
+        float timer = 0;
+
+        while (timer < 1)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+            tower.transform.localPosition = Vector3.Lerp(startPos, targetPos, timer);
+        }
+
+        tower.transform.localPosition = targetPos;
+
+        yield return new WaitForSeconds(19);
+
+        timer = 0;
+
+        while (timer < 1)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+            tower.transform.localPosition = Vector3.Lerp(targetPos, startPos, timer);
+        }
+
+        tower.transform.localPosition = startPos;
+
+        tower.SetActive(false);
+        towerActive = false;
+    }
 }

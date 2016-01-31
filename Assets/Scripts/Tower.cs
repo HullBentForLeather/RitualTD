@@ -21,7 +21,11 @@ public class Tower : MonoBehaviour
     public GameObject bullet;
 
    
-    
+    public void Start()
+    {
+        // Wait a second before we can fire
+        lastShot = Time.time + 1 - fireRate;
+    }
 
     void OnDrawGizmos()
     {
@@ -45,12 +49,6 @@ public class Tower : MonoBehaviour
 
     public void Update ()
     {
-        if (time + 15 < Time.time)
-        {
-            
-            gameObject.SetActive(false);
-            
-        }
 
         checkTimer += Time.deltaTime;
 
