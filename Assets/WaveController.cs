@@ -49,6 +49,11 @@ public class WaveController : MonoBehaviour
         EnemyScript.OnEnemyDied += EnemyDied;
 
     }
+
+    void OnDisable()
+    {
+        EnemyScript.OnEnemyDied -= EnemyDied;
+    }
 	
     void Start()
     {

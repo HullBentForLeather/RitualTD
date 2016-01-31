@@ -20,12 +20,23 @@ public class Tower : MonoBehaviour
 
     public GameObject bullet;
 
-   
-    public void Start()
+
+    public void OnEnable()
     {
         // Wait a second before we can fire
         lastShot = Time.time + 1 - fireRate;
     }
+
+    void Start()
+    {
+         time = Time.time;
+
+         checkRate = 0.1f;
+         checkTimer = 0;
+
+        lastShot = 0;
+        fireRate = 0.6f;
+}
 
     void OnDrawGizmos()
     {
