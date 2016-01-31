@@ -166,46 +166,9 @@ public class WaveController : MonoBehaviour
             {
                 Application.LoadLevel(0);
             }
-            if (Input.GetKeyDown(KeyCode.Keypad1))
-            {
-                Wave1();
-            }
 
-            if (Input.GetKeyDown(KeyCode.Keypad2))
-            {
-                Wave2();
-            }
 
-            if (Input.GetKeyDown(KeyCode.Keypad3))
-            {
-                Wave3();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Keypad4))
-            {
-                Wave4();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Keypad5))
-            {
-                Wave5();
-            }
-            if (Input.GetKeyDown(KeyCode.Keypad6))
-            {
-                Wave6();
-            }
-            if (Input.GetKeyDown(KeyCode.Keypad6))
-            {
-                Wave7();
-            }
-            //if (Input.GetKeyDown(KeyCode.Keypad5))
-            //{
-            //  //  Wave8();
-            //}
-            //if (Input.GetKeyDown(KeyCode.Keypad5))
-            //{
-            // //   Wave9();
-            //}
+            
         }
 	}
 
