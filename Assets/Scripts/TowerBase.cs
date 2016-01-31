@@ -7,6 +7,7 @@ public class TowerBase : MonoBehaviour
 
     bool playerInBounds = false;
 
+    AudioSource clang;
 
     public GameObject tower;
 
@@ -33,8 +34,12 @@ public class TowerBase : MonoBehaviour
     {
 	    if (playerInBounds && Input.GetButtonDown("Build Tower"))
         {
+            clang = GetComponent<AudioSource>();
+            clang.Play();
             gameObject.SetActive(true);
-            GameObject.Instantiate(tower, transform.position, transform.rotation);  
+            GameObject.Instantiate(tower, transform.position, transform.rotation);
+            
+              
         }
 	}
 }

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerControls : MonoBehaviour
 {
-
+    AudioClip shootsound;
 
     [SerializeField]
     Vector2 leftThumbStick;

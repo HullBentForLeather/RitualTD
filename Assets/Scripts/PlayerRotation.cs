@@ -7,8 +7,7 @@ public class PlayerRotation : MonoBehaviour
     public GameObject bullet;
     float shootDelay = 1f;
     bool canShoot;
-
-
+    AudioSource pew;
     public Vector2 rightThumbStick;
     public Vector3 direction;
     float heading = 0;
@@ -17,6 +16,9 @@ public class PlayerRotation : MonoBehaviour
     void Start()
     {
         canShoot = true;
+
+        
+        pew = GetComponent<AudioSource>();
     }
 
     void ResetShot()
@@ -47,6 +49,7 @@ public class PlayerRotation : MonoBehaviour
                 Instantiate(bullet, transform.position, transform.rotation);
 
                 canShoot = false;
+                pew.Play();
                 Invoke("ResetShot", shootDelay);
             }
         }
