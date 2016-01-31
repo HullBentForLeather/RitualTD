@@ -14,11 +14,13 @@ public class PlayerControls : MonoBehaviour
     [SerializeField]
     float attackDuration;
     [SerializeField]
+    float areaAttackCoolDown;
+    [SerializeField]
     float attackCoolDown;
-
 
     [SerializeField]
     float forwardAttackTimer;
+    [SerializeField]
     float areaAttackTimer;
 
     bool forwardAttacking;
@@ -65,7 +67,7 @@ public class PlayerControls : MonoBehaviour
         {
             areaAttackTimer -= Time.deltaTime;
 
-            if (areaAttackTimer < attackCoolDown - attackDuration)
+            if (areaAttackTimer < areaAttackCoolDown - attackDuration)
             {
                 areaHitBox.SetActive(false);
             }
@@ -76,7 +78,7 @@ public class PlayerControls : MonoBehaviour
 
             if (areaAttackTimer <= 0)
             {
-                areaAttackTimer = attackCoolDown;
+                areaAttackTimer = areaAttackCoolDown;
                 areaAttacking = false;
             }
         }

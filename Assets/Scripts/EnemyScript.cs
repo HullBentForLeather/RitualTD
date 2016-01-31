@@ -35,7 +35,10 @@ public class EnemyScript : MonoBehaviour, IDamageable
         currentNode = node;
     }
 
-
+    public void setHP(int HP)
+    {
+        this.HP = HP;
+    }
 
     // Use this for initialization
     void Start ()
