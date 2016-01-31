@@ -14,7 +14,7 @@ public class Tower : MonoBehaviour
     public int Damage = 1;
 
     float lastShot = 0;
-    float fireRate = 2f;
+    float fireRate = 0.6f;
 
     public Transform shotOrigin;
 
@@ -45,7 +45,7 @@ public class Tower : MonoBehaviour
 
     public void Update ()
     {
-        if (time + 10 < Time.time)
+        if (time + 15 < Time.time)
         {
             
             gameObject.SetActive(false);
