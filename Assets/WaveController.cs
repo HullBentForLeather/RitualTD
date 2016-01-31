@@ -58,7 +58,7 @@ public class WaveController : MonoBehaviour
     void Start()
     {
         track1.volume = 0;
-        track2.volume = 1;
+        track2.volume = 0.4f;
         track3.volume = 0;
     }
 	// Update is called once per frame
@@ -68,31 +68,31 @@ public class WaveController : MonoBehaviour
 
         if (wavetimer >= 315)
         {
-            track1.volume = 1;
-            track2.volume = 1;
-            track3.volume = 1;
+            track1.volume = 0.4f;
+            track2.volume = 0.4f;
+            track3.volume = 0.4f;
         }
         else if (wavetimer >= 270)
         {
-            track1.volume = 1;
+            track1.volume = 0.4f;
             track2.volume = 0;
-            track3.volume = 1;
+            track3.volume = 0.4f;
         }
         else if (wavetimer >= 225)
         {
             track1.volume = 0;
             track2.volume = 0;
-            track3.volume = 1;
+            track3.volume = 0.4f;
         }
         else if (wavetimer >= 135)
         {
-            track1.volume = 1;
-            track2.volume = 1;
+            track1.volume = 0.4f;
+            track2.volume = 0.4f;
             track3.volume = 0;
         }
         else if (wavetimer >= 45)
         {
-            track1.volume = 1;
+            track1.volume = 0.4f;
             track2.volume = 0;
             track3.volume = 0;
         }
