@@ -4,14 +4,15 @@ using System.Collections;
 public class Pillar : MonoBehaviour, IDamageable
 {
     public bool Alive;
-
+    AudioSource crash;
     Core myCore;
 
     void Start()
     {
         Alive = true;
+        crash = GetComponent<AudioSource>();
     }
-
+    
     public void DoDamage(int amount)
     {
         Destroy();
@@ -23,8 +24,14 @@ public class Pillar : MonoBehaviour, IDamageable
         {           
             Alive = false;
             myCore.DoDamage(this);
+
+            crash.Play();
+
             GameManager.PillarFallDown();
+
             StartCoroutine(FallDown());
+
+
         }
         
     }
@@ -36,6 +43,7 @@ public class Pillar : MonoBehaviour, IDamageable
 
     IEnumerator FallDown()
     {
+        
         Quaternion fall = transform.localRotation * Quaternion.Euler(90, 0, 0);
         Quaternion start = transform.localRotation;
 

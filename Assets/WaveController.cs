@@ -9,8 +9,32 @@ public class WaveController : MonoBehaviour
     public EnemySpawner spawn4;
     public EnemySpawner spawn5;
 
+    [SerializeField]
+    bool wave1Done;
+    [SerializeField]
+    bool wave2Done;
+    [SerializeField]
+    bool wave3Done;
+    [SerializeField]
+    bool wave4Done;
+    [SerializeField]
+    bool wave5Done;
+    [SerializeField]
+    bool wave6Done;
+    [SerializeField]
+    bool wave7Done;
+    [SerializeField]
+    bool wave8Done;
+    [SerializeField]
+    bool wave9Done;
+    [SerializeField]
+    bool wave10Done;
+
+    //public float 
     public OrbOfProgressBehav progress;
 
+    [SerializeField]
+    float wavetimer = 0;
 
     void OnEnable ()
     {
@@ -21,9 +45,33 @@ public class WaveController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        wavetimer += Time.deltaTime;
+
+        
 
         if (!progress.IsWaveInProgress())
         {
+
+            if (!wave1Done)
+            {
+                Wave1();
+                wave1Done = true;
+            }
+            
+
+            if (wavetimer >= 40 && !wave2Done)
+            {
+                Wave2();
+                wave2Done = true;
+            }
+
+            if (wavetimer >= 75 && !wave3Done)
+            {
+                Wave3();
+                wave3Done = true;
+            }
+
+
             if (Input.GetKeyDown(KeyCode.Keypad1))
             {
                 Wave1();
@@ -74,26 +122,29 @@ public class WaveController : MonoBehaviour
 
     void Wave1() 
     {
-        int enemies = 5;
-        spawn1.StartWave(enemies, 5, 1, Color.red);
+        int enemies = 30;
+        spawn1.StartWave(enemies, 0, 1, Color.red, 1);
+        
         progress.newWave(enemies);
     }
 
     void Wave2()
     {
-        int enemies = 10;
-        spawn1.StartWave(5, 5, 1, Color.blue);
+        int enemies = 30;
+        spawn1.StartWave(10, 5, 1, Color.blue, 1);
 
-        spawn2.StartWave(5, 10, 1.5f, Color.blue);
+        spawn2.StartWave(10, 10, 1, Color.blue, 1);
+
+        spawn5.StartWave(10, 15, 1, Color.black, 1);
 
         progress.newWave(enemies);
     }
 
     void Wave3()
     {
-        int enemies = 20;
-        spawn1.StartWave(10, 0, 2, Color.red);
-        spawn2.StartWave(10, 0, 3, Color.blue);
+        int enemies = 55;
+        spawn1.StartWave(35, 10, 1, Color.red, 2);
+        spawn2.StartWave(20, 0, 1, Color.blue, 2);
 
 
         progress.newWave(enemies);
@@ -101,32 +152,38 @@ public class WaveController : MonoBehaviour
 
     void Wave4()
     {
-        int enemies = 30;
-        spawn1.StartWave(10, 0, 2, Color.red);
-        spawn2.StartWave(10, 0, 1, Color.red);
-        spawn3.StartWave(10, 0, 3, Color.red);
-      
+        int enemies = 100;
+        spawn1.StartWave(20, 0, 2, Color.red, 2);
+        spawn2.StartWave(20, 0, 1, Color.red, 2);
+        spawn3.StartWave(20, 0, 3, Color.red, 2);
+        spawn4.StartWave(20, 0, 1, Color.red, 2);
+        spawn5.StartWave(20, 0, 3, Color.red, 2);
+
         progress.newWave(enemies);
     }
 
     void Wave5()
     {
-        int enemies = 10;
-        spawn3.StartWave(10, 0, 2, Color.green);
+        int enemies = 120;
+        spawn1.StartWave(40, 0, 2, Color.red, 2);
+        spawn2.StartWave(40, 0, 1, Color.red, 2);
+        spawn3.StartWave(40, 0, 3, Color.red, 2);
+
+
         progress.newWave(enemies);
     }
 
     void Wave6()
     {
-        int enemies = 20;
-        spawn1.StartWave(10, 0, 2, Color.green);
+        int enemies = 120;
+        spawn1.StartWave(10, 0, 2, Color.green, 8);
         progress.newWave(enemies);
     }
     void Wave7()
     {
         int enemies = 30;
-        spawn1.StartWave(10, 0, 2, Color.green);
-        spawn2.StartWave(10, 0, 2, Color.red);
+        spawn1.StartWave(10, 0, 2, Color.green, 8);
+        spawn2.StartWave(10, 0, 2, Color.red,9);
         progress.newWave(enemies);
     }
 }
