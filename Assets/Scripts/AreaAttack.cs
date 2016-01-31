@@ -3,10 +3,10 @@ using System.Collections;
 
 public class AreaAttack : MonoBehaviour
 {
-    public float attackDuration = 0.2f;
+    public float attackDuration = 1f;
     public float attackDelay = 0.5f;
 
-    public GameObject damageBox;
+    public GameObject explosion;
 
     public AudioSource attackSound;
 
@@ -24,11 +24,6 @@ public class AreaAttack : MonoBehaviour
         attackRequested = false;
     }
 
-    void Start()
-    {
-        damageBox.SetActive(false);
-    }
-
     void Update()
     {
         if (attackRequested && !attackInProgress)
@@ -41,13 +36,11 @@ public class AreaAttack : MonoBehaviour
     {
         attackInProgress = true;
 
-        damageBox.SetActive(true);
-        attackSound.Play();
+        GameObject expl = GameObject.Instantiate(explosion, transform.position, Quaternion.identity) as GameObject;
+        expl.GetComponent<AreaExplosion>().SetDuration(attackDuration);
+        attackSound.Play();      
 
-        yield return new WaitForSeconds(attackDuration);
-        damageBox.SetActive(false);
-
-        yield return new WaitForSeconds(attackDelay);
+        yield return new WaitForSeconds(attackDuration + attackDelay);    
         attackInProgress = false;
     }
 }
