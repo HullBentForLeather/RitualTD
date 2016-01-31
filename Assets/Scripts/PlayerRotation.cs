@@ -3,57 +3,27 @@ using System.Collections;
 
 public class PlayerRotation : MonoBehaviour
 {
-
-    public GameObject bullet;
-    float shootDelay = 1f;
-    bool canShoot;
-
-
-    public Vector2 rightThumbStick;
-    public Vector3 direction;
-    float heading = 0;
+    public GameObject rotateObject;
+    Transform mainCamera;
 
     // Use this for initialization
     void Start()
     {
-        canShoot = true;
+        mainCamera = Camera.main.transform;
     }
 
-    void ResetShot()
+    public void RotateDirection(Vector2 dir)
     {
-        canShoot = true;
-    }
+        Vector3 camUp = mainCamera.forward;
+        Vector3 playerUp = new Vector3(camUp.x, 0, camUp.z).normalized;
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
+        Quaternion targetRotation = Quaternion.FromToRotation(playerUp, new Vector3(dir.x, 0, dir.y));
 
-        rightThumbStick = new Vector2(Input.GetAxis("Right Horizontal"), Input.GetAxis("Right Vertical"));
+        Quaternion standardRotation = Quaternion.FromToRotation(Vector3.forward, playerUp);
 
+        Quaternion ResultRot = standardRotation * targetRotation;
+        Vector3 ResultDir = ResultRot * Vector3.forward;
 
-        Transform mainCamera = Camera.main.transform;
-        //direction = new Vector3(rightThumbStick.x, 0, rightThumbStick.y);
-        direction = Vector3.right * rightThumbStick.x + Vector3.forward * rightThumbStick.y;
-        if (rightThumbStick.sqrMagnitude < 0.1f)
-        {
-
-        }
-        else
-        {
-            transform.rotation = Quaternion.LookRotation(direction);
-
-            if (canShoot)
-            {
-                Instantiate(bullet, transform.position, transform.rotation);
-
-                canShoot = false;
-                Invoke("ResetShot", shootDelay);
-            }
-        }
-        //heading = Mathf.Atan2(rightThumbStick.x, rightThumbStick.y) * Mathf.Rad2Deg;
-        //transform.rotation =  Quaternion.Euler(0f, heading * Mathf.Rad2Deg, 0f );
-
-
-
+        rotateObject.transform.rotation = Quaternion.LookRotation(ResultDir, Vector3.up);
     }
 }
