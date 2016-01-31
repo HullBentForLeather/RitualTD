@@ -16,9 +16,11 @@ public class GameManager : MonoBehaviour {
         if (shrineHP <= 0 )
         {
 
-
+            Application.LoadLevel(0);
+            /*
             gameOverScreen.SetActive(true);
             Time.timeScale = 0.0f;
+            */
 
         }
     }
