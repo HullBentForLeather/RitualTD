@@ -9,6 +9,14 @@ public class WaveController : MonoBehaviour
     public EnemySpawner spawn4;
     public EnemySpawner spawn5;
 
+    public AudioSource track1;
+    public AudioSource track2;
+    public AudioSource track3;
+
+    AudioSource source;
+
+
+    
     [SerializeField]
     bool wave1Done;
     [SerializeField]
@@ -42,18 +50,57 @@ public class WaveController : MonoBehaviour
 
     }
 	
+    void Start()
+    {
+        track1.volume = 0;
+        track2.volume = 1;
+        track3.volume = 0;
+    }
 	// Update is called once per frame
 	void Update ()
     {
         wavetimer += Time.deltaTime;
 
-        
+        if (wavetimer >= 315)
+        {
+            track1.volume = 1;
+            track2.volume = 1;
+            track3.volume = 1;
+        }
+        else if (wavetimer >= 270)
+        {
+            track1.volume = 1;
+            track2.volume = 0;
+            track3.volume = 1;
+        }
+        else if (wavetimer >= 225)
+        {
+            track1.volume = 0;
+            track2.volume = 0;
+            track3.volume = 1;
+        }
+        else if (wavetimer >= 135)
+        {
+            track1.volume = 1;
+            track2.volume = 1;
+            track3.volume = 0;
+        }
+        else if (wavetimer >= 45)
+        {
+            track1.volume = 1;
+            track2.volume = 0;
+            track3.volume = 0;
+        }
 
+
+        
         if (!progress.IsWaveInProgress())
         {
 
             if (!wave1Done)
             {
+                
+                
                 Wave1();
                 wave1Done = true;
             }
@@ -71,8 +118,10 @@ public class WaveController : MonoBehaviour
                 wave3Done = true;
             }
             
+            
             if (wavetimer >= 120 && !wave4Done)
             {
+                
                 Wave4();
                 wave4Done = true;
             }
@@ -115,7 +164,7 @@ public class WaveController : MonoBehaviour
 
             if (wavetimer >= 415)
             {
-                //I won yay
+                Application.LoadLevel(0);
             }
             if (Input.GetKeyDown(KeyCode.Keypad1))
             {
