@@ -15,7 +15,7 @@ public class OrbOfProgressBehav : MonoBehaviour {
     float currentEnemies;
     int currentStage = -1;
 
-    GameObject line = new GameObject();
+    //GameObject line = new GameObject();
 
     bool waveInProgress = false;
 
@@ -38,12 +38,15 @@ public class OrbOfProgressBehav : MonoBehaviour {
 
         //LINE STUFF
     //    line.transform.localPosition = leftMostPos;
-        line.AddComponent<LineRenderer>();
+
+
+        /*line.AddComponent<LineRenderer>();
         LineRenderer lr = line.GetComponent<LineRenderer>();
         lr.SetColors(Color.red, Color.red);
         lr.SetWidth(0.1f, 0.1f);
         lr.SetPosition(0, leftMostPos);
         lr.SetPosition(1, orb.transform.localPosition);
+        */
 
     }
 
