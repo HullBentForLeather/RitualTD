@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TowerBase : MonoBehaviour
 {
-    bool built = false;
+   // public bool built = false;
 
     bool playerInBounds = false;
 
@@ -16,6 +16,8 @@ public class TowerBase : MonoBehaviour
         {
             playerInBounds = true;
         }
+
+        
     }
 
     void OnTriggerExit(Collider other)
@@ -29,10 +31,10 @@ public class TowerBase : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-	    if (!built && playerInBounds && Input.GetButtonDown("Build Tower"))
+	    if (playerInBounds && Input.GetButtonDown("Build Tower"))
         {
-            GameObject.Instantiate(tower, transform.position, transform.rotation);
-            built = true;
+            gameObject.SetActive(true);
+            GameObject.Instantiate(tower, transform.position, transform.rotation);  
         }
 	}
 }
