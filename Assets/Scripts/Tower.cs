@@ -5,6 +5,8 @@ public class Tower : MonoBehaviour
 {
     IDamageable currentTarget = null;
 
+    float time = Time.time;
+
     float checkRate = 0.1f;
     float checkTimer = 0;
 
@@ -17,6 +19,9 @@ public class Tower : MonoBehaviour
     public Transform shotOrigin;
 
     public GameObject bullet;
+
+   
+    
 
     void OnDrawGizmos()
     {
@@ -34,16 +39,26 @@ public class Tower : MonoBehaviour
             Gizmos.DrawLine(shotOrigin.position, currentTarget.GetPosition());            
         }
         Gizmos.DrawWireSphere(transform.position, Range);
+
+        
     }
 
-    void Update ()
+    public void Update ()
     {
+        if (time + 10 < Time.time)
+        {
+            
+            gameObject.SetActive(false);
+            
+        }
+
         checkTimer += Time.deltaTime;
 
         if (currentTarget == null && checkTimer >= checkRate)
         {
             checkTimer -= checkRate;
-            DoTargetCheck();            
+            DoTargetCheck();  
+                      
         }
 
         if (currentTarget != null)
@@ -58,6 +73,8 @@ public class Tower : MonoBehaviour
         {
             TryShot();
         }
+
+        
 	
 	}
 
