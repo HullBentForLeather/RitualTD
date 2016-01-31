@@ -9,7 +9,7 @@ public class EnemySpawner : MonoBehaviour {
     List<GameObject> enemies = new List<GameObject>();
 
     bool waveStarted = false;
-
+    int HP;
     int spawnCount;
     int numSpawned;
     float startDelay = 0;
@@ -27,7 +27,7 @@ public class EnemySpawner : MonoBehaviour {
         waveStarted = false;
 	}
 	
-    public void StartWave(int count, float delay, float spawnrate, Color color)
+    public void StartWave(int count, float delay, float spawnrate, Color color, int HP)
     {
         spawnCount = count;
         numSpawned = 0;
@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour {
         waveStartTime = Time.time;
 
         waveStarted = true;
-
+        this.HP = HP;
         this.color = color;
 
 
@@ -69,7 +69,7 @@ public class EnemySpawner : MonoBehaviour {
 
 
                         enemyScript.SetStartNode(startNode);
-
+                        enemyScript.setHP(HP);
                         enemyScript.GetComponentInChildren<Renderer>().material.color = color;
 
                         enemies.Add(newItem);
