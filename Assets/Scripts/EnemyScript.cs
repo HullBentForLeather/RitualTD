@@ -38,6 +38,7 @@ public class EnemyScript : MonoBehaviour, IDamageable
     public void setHP(int HP)
     {
         this.HP = HP;
+        this.startingHP = HP;
     }
 
     // Use this for initialization
@@ -91,6 +92,18 @@ public class EnemyScript : MonoBehaviour, IDamageable
         {
             transform.position = Vector3.MoveTowards(transform.position, target.GetPosition(), speed * Time.deltaTime);
 
+
+            Vector3 dir = target.GetPosition() - transform.position;
+            dir.y = 0;
+
+            if (dir.magnitude > 0)
+            {
+                dir.Normalize();
+
+                Quaternion targetrot = Quaternion.LookRotation(dir, Vector3.up);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetrot, Time.deltaTime * 10);
+            }
+
             if (Vector3.Distance(transform.position, target.GetPosition()) < 0.5f)
             {
                 attackCounter += Time.deltaTime;
@@ -111,6 +124,17 @@ public class EnemyScript : MonoBehaviour, IDamageable
             if (currentNode != null)
             {
                 transform.position = Vector3.MoveTowards(transform.position, currentNode.transform.position, speed * Time.deltaTime);
+
+                Vector3 dir = currentNode.transform.position - transform.position;
+                dir.y = 0;
+
+                if (dir.magnitude > 0)
+                {
+                    dir.Normalize();
+
+                    Quaternion targetrot = Quaternion.LookRotation(dir, Vector3.up);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, targetrot, Time.deltaTime *10);
+                }
 
                 if (Vector3.Distance(transform.position, currentNode.transform.position) < 0.1f)
                 {
