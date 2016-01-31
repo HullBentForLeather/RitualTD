@@ -25,18 +25,15 @@ public class Tower : MonoBehaviour
     {
         // Wait a second before we can fire
         lastShot = Time.time + 1 - fireRate;
+
+        time = Time.time;
+
+        checkRate = 0.1f;
+        checkTimer = 0;
+
+        fireRate = 0.6f;
     }
 
-    void Start()
-    {
-         time = Time.time;
-
-         checkRate = 0.1f;
-         checkTimer = 0;
-
-        lastShot = 0;
-        fireRate = 0.6f;
-}
 
     void OnDrawGizmos()
     {
