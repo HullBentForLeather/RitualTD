@@ -3,6 +3,7 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
+    bool gameOver = false;
     public GameObject gameOverScreen;
     // Use this for initialization
     void Start()
@@ -15,14 +16,23 @@ public class GameManager : MonoBehaviour {
     {
         if (shrineHP <= 0 )
         {
+            if (!gameOver)
+            {
+                gameOver = true;
+                StartCoroutine(loadmainmenu());
+            }
 
-            Application.LoadLevel(0);
-            /*
-            gameOverScreen.SetActive(true);
-            Time.timeScale = 0.0f;
-            */
 
+            
         }
+    }
+
+    IEnumerator loadmainmenu ()
+    {
+        gameOverScreen.SetActive(true);
+        //Time.timeScale = 0.0f;
+        yield return new WaitForSeconds(5);
+        Application.LoadLevel(0);
     }
 
     public static void PillarFallDown()
