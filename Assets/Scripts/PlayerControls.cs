@@ -3,128 +3,95 @@ using System.Collections;
 
 public class PlayerControls : MonoBehaviour
 {
-    AudioClip shootsound;
 
-    [SerializeField]
-    Vector2 leftThumbStick;
+    SwordAttack swordAttack;
+    AreaAttack areaAttack;
+    MissileAttack missileAttack;
 
-    public GameObject forwardHitBox;
-    public GameObject areaHitBox;
+    PlayerRotation playerRotation;
 
-    [SerializeField]
-    float attackDuration;
-    [SerializeField]
-    float areaAttackCoolDown;
-    [SerializeField]
-    float attackCoolDown;
+    public float movespeed = 10.0f;
 
-    [SerializeField]
-    float forwardAttackTimer;
-    [SerializeField]
-    float areaAttackTimer;
-
-    bool forwardAttacking;
-    bool areaAttacking;
+    Vector2 turnDirection = Vector2.zero;
 
     // Use this for initialization
     void Start ()
     {
-        leftThumbStick = Vector2.zero;
-        forwardAttackTimer = attackCoolDown;
-        areaAttackTimer = attackCoolDown;
-        forwardAttacking = false;
-        areaAttacking = false;
+        swordAttack = GetComponent<SwordAttack>();
+        areaAttack = GetComponent<AreaAttack>();
+        missileAttack = GetComponent<MissileAttack>();
+
+        playerRotation = GetComponent<PlayerRotation>();
 	}
 
-    void ForwardAttackCheck()
+    void DoMovement()
     {
-        if (forwardAttacking)
+        Vector2 leftThumbStick = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        // Prevent issue where moving diagonally is faster
+        if (leftThumbStick.magnitude > 1)
         {
-            forwardAttackTimer -= Time.deltaTime;
+            leftThumbStick.Normalize();
+        }
 
-            if (forwardAttackTimer < attackCoolDown - attackDuration)
-            {
-                forwardHitBox.SetActive(false);
-            }
-            else
-            {
-                forwardHitBox.SetActive(true);
-            }
+        leftThumbStick = leftThumbStick * Time.deltaTime * movespeed;
 
-            if (forwardAttackTimer <= 0)
-            {
-                forwardAttackTimer = attackCoolDown;
-                forwardAttacking = false;
-            }
+        transform.Translate(new Vector3(leftThumbStick.x, 0, leftThumbStick.y));
+    }
+
+    void DoTurning()
+    {
+        Vector2 rightThumbStick = new Vector2(Input.GetAxis("Right Horizontal"), Input.GetAxis("Right Vertical"));
+
+        if (rightThumbStick.magnitude > 0.2f)
+        {
+            turnDirection = rightThumbStick.normalized;
+
+            playerRotation.RotateDirection(turnDirection);
+        }
+        else
+        {
+            turnDirection = Vector2.zero;
         }
     }
 
-
-
-    void AreaAttackCheck()
+    void DoAttacks()
     {
-        if (areaAttacking)
+        if (Input.GetButtonDown("Forward Attack"))
         {
-            areaAttackTimer -= Time.deltaTime;
-
-            if (areaAttackTimer < areaAttackCoolDown - attackDuration)
-            {
-                areaHitBox.SetActive(false);
-            }
-            else
-            {
-                areaHitBox.SetActive(true);
-            }
-
-            if (areaAttackTimer <= 0)
-            {
-                areaAttackTimer = areaAttackCoolDown;
-                areaAttacking = false;
-            }
+            swordAttack.StartAttacking();
+        }
+        else if (Input.GetButtonUp("Forward Attack"))
+        {
+            swordAttack.StopAttacking();
         }
 
+        if (Input.GetButtonDown("Area Attack"))
+        {
+            areaAttack.StartAttacking();
+        }
+        else if (Input.GetButtonUp("Area Attack"))
+        {
+            areaAttack.StopAttacking();
+        }
 
-       
-    }
-
-	void ActionCheck()
-    {
-
-
-        ForwardAttackCheck();
-        AreaAttackCheck();
-
-        
-
-
+        if (turnDirection != Vector2.zero)
+        {
+            missileAttack.StartAttacking();
+        }
+        else
+        {
+            missileAttack.StopAttacking();
+        }
     }
 
 
     void Update()
     {
-        if (Input.GetButton("Forward Attack"))
-        {
-            forwardAttacking = true;
-        }
+        DoMovement();
 
-        if (Input.GetButton("Area Attack"))
-        {
-            areaAttacking = true;
-        }
+        DoTurning();
 
-        ActionCheck();
+        DoAttacks();        
     }
-	// Update is called once per frame
-	void FixedUpdate()
-    {
-        leftThumbStick = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        
-        transform.Translate(new Vector3(leftThumbStick.x,0 , leftThumbStick.y));
-
-        
-        
-
-
-        
-	}
 }
